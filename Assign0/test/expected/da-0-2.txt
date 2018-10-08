@@ -1,0 +1,13 @@
+STRING test of DA, simple
+items: [[1]]
+items: [a4,a3,a2,a1,[0]]
+items: [a4,a2,a1,[1]]
+items: [a4,a2,[2]]
+items: [a2,[3]]
+items: [[1]]
+items: [a4,a3,a2,a1]
+items: [a4,a2,a1]
+items: [a4,a2]
+items: [a2]
+items: []
+size: 0

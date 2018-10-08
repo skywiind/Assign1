@@ -1,0 +1,2 @@
+INTEGER test of QUEUE, insertions and deletions at front
+items: <>

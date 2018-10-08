@@ -1,0 +1,4 @@
+﻿  cda-0-15.c
+cda-0-15.obj : error LNK2019: unresolved external symbol _srandom referenced in function _main
+cda-0-15.obj : error LNK2019: unresolved external symbol _random referenced in function _main
+D:\code\CS201\Assign0\fix\fix\Debug\fix.exe : fatal error LNK1120: 2 unresolved externals

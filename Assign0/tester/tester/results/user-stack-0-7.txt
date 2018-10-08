@@ -1,0 +1,2 @@
+INTEGER test of STACK, insertions and deletions at front
+items: ||

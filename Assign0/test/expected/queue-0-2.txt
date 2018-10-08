@@ -1,0 +1,10 @@
+STRING test of QUEUE, simple
+items: <>
+items: <a3,a2,a4,a1>
+items: (a3,a2,a4,a1,a3,a2,a4,a1)
+items: (a3,a2,a4,a1,a3,a2,a4,a1,a3,a2,a4,a1,(4))
+items: <a2,a4,a1,a3,a2,a4,a1,a3,a2,a4,a1>
+items: <a4,a1,a3,a2,a4,a1,a3,a2,a4,a1>
+items: <a1,a3,a2,a4,a1,a3,a2,a4,a1>
+items: <a3,a2,a4,a1,a3,a2,a4,a1>
+size: 8

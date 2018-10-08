@@ -1,0 +1,4 @@
+﻿datest.obj : error LNK2019: unresolved external symbol _newINTEGER referenced in function _main
+datest.obj : error LNK2019: unresolved external symbol _displayINTEGER referenced in function _main
+datest.obj : error LNK2019: unresolved external symbol _freeINTEGER referenced in function _main
+D:\code\CS201\Assign0\Debug\Assign0da.exe : fatal error LNK1120: 3 unresolved externals

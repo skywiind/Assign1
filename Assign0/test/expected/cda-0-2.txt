@@ -1,0 +1,9 @@
+STRING test of CDA, simple
+items: ((1))
+items: (a4,a3,a2,a1,(0))
+items: (a4,a3,a2,a4,a1,a3,a2,a1)
+items: (a4,a2,a4,a1,a3,a2,a1)
+items: (a4,a2,a4,a1,a3,a2)
+items: (a2,a4,a1,a3,a2)
+items: (a4,a1,a3,a2)
+size: 4

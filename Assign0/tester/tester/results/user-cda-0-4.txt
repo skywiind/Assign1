@@ -1,0 +1,2 @@
+INTEGER test of CDA, insertions at the front
+items: ((1))

@@ -1,0 +1,10 @@
+INTEGER test of STACK, insertions and deletions at front
+items: ||
+items: ||
+size is 0
+items: []
+size is 0
+items: (displaying top element)
+781572
+
+size is 829973

@@ -1,0 +1,10 @@
+STRING test of STACK, simple
+items: ||
+items: |a1,a4,a2,a3|
+items: [a3,a2,a4,a1,a3,a2,a4,a1]
+items: [a3,a2,a4,a1,a3,a2,a4,a1,a3,a2,a4,a1,[4]]
+items: |a4,a2,a3,a1,a4,a2,a3,a1,a4,a2,a3|
+items: |a2,a3,a1,a4,a2,a3,a1,a4,a2,a3|
+items: |a3,a1,a4,a2,a3,a1,a4,a2,a3|
+items: |a1,a4,a2,a3,a1,a4,a2,a3|
+size: 8
