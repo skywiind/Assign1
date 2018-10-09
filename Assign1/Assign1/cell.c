@@ -57,3 +57,13 @@ void freeCELL(CELL * cell) {
 	free(cell);
 	return;
 }
+
+void drawCELL(CELL * cell) {
+
+	return;
+}
+
+void writeCELL(CELL * cell, FILE * fp) {
+
+	return;
+}

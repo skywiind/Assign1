@@ -30,7 +30,10 @@ MAZE * newMAZE(int h, int w) {
 	return maze;
 }
 
+
+
 void createMAZE(MAZE * maze) {
+	
 	return;
 }
 
@@ -43,5 +46,6 @@ void writeMAZE(MAZE * maze, FILE * fp) {
 }
 
 void drawMAZE(MAZE * maze) {
+	
 	return;
 }

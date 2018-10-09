@@ -21,5 +21,7 @@ extern int   getRWall(CELL * cell);
 extern int   getRow(CELL * cell);
 extern int   getCol(CELL * cell);
 extern void  freeCELL(CELL *);
+extern void  drawCELL(CELL *);
+extern void  writeCELL(CELL *, FILE *);
 
 #endif
