@@ -14,12 +14,14 @@
 
 typedef struct cell CELL;
 
-extern CELL *newCELL(int row, int col);
-extern void  setCELL(CELL * cell, int b, int r);
-extern int   getBWall(CELL * cell);
-extern int   getRWall(CELL * cell);
-extern int   getRow(CELL * cell);
-extern int   getCol(CELL * cell);
+extern CELL *newCELL(int, int);
+extern void  setCELL(CELL *, int, int);
+extern int   getBWall(CELL *);
+extern int   getRWall(CELL *);
+extern int   getRow(CELL *);
+extern int   getCol(CELL *);
+extern void  visitCELL(CELL *);
+extern int   checkCELL(CELL *);
 extern void  freeCELL(CELL *);
 extern void  drawCELL(CELL *);
 extern void  writeCELL(CELL *, FILE *);

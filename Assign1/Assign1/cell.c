@@ -58,6 +58,15 @@ void freeCELL(CELL * cell) {
 	return;
 }
 
+void visitCELL(CELL * cell) {
+	cell->vis = 1;
+	return;
+}
+
+int checkCELL(CELL * cell) {
+	return cell->vis;
+}
+
 void drawCELL(CELL * cell) {
 
 	return;
