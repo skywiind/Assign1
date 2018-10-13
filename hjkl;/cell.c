@@ -31,12 +31,8 @@ CELL * newCELL(int row, int col) {
 	return cell;
 }
 
-void setBWall(CELL * cell, int b) {
+void setCELL(CELL * cell, int b, int r) {
 	cell->b = b;
-	return;
-}
-
-void setRWall(CELL * cell, int r) {
 	cell->r = r;
 	return;
 }
@@ -66,12 +62,6 @@ void freeCELL(CELL * cell) {
 	return;
 }
 
-void resetCELL(CELL * cell) {
-	cell->vis = 0;
-	cell->step = -1;
-	return;
-}
-
 void visitCELL(CELL * cell) {
 	cell->vis = 1;
 	return;
@@ -79,9 +69,4 @@ void visitCELL(CELL * cell) {
 
 int checkCELL(CELL * cell) {
 	return cell->vis;
-}
-
-void stepCELL(CELL * cell, int value) {
-	cell->step = value;
-	return;
 }

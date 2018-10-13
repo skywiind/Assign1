@@ -1,0 +1,17 @@
+options.c
+cell.c (cell.h)
+maze.c (maze.h)
+main.c
+
+commands will always be valid and correct
+      
+    -------		cell has:		
+   |       |		b and r wall ints
+   |       |		row and col  ints
+   |       |0/1		step value
+   |       |		visited value
+   |       |
+    -------
+      0/1
+
+neighbor func

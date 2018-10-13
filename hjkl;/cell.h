@@ -15,8 +15,7 @@
 typedef struct cell CELL;
 
 extern CELL *newCELL(int, int);
-extern void  setRWall(CELL*, int);
-extern void  setBWall(CELL *, int);
+extern void  setCELL(CELL *, int, int);
 extern int   getBWall(CELL *);
 extern int   getRWall(CELL *);
 extern int   getRow(CELL *);
@@ -25,7 +24,5 @@ extern int   getStep(CELL *);
 extern void  visitCELL(CELL *);
 extern int   checkCELL(CELL *);
 extern void  freeCELL(CELL *);
-extern void  resetCELL(CELL *);
-extern void  stepCELL(CELL *, int);
 
 #endif

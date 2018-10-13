@@ -1,0 +1,59 @@
+﻿  Validating sources
+  Copying sources remotely to 'localhost'
+  Validating architecture
+  Starting remote build
+  Compiling sources:
+  amaze.c
+  cda.c
+D:\code\CS201\Assign1\Assign1\cda.c(62,40): warning : conversion to 'long unsigned int' from 'int' may change the sign of the result [-Wsign-conversion]
+D:\code\CS201\Assign1\Assign1\cda.c(62,40): warning :    items->arr = malloc((sizeof(void *)) * (items->cap * 2));
+D:\code\CS201\Assign1\Assign1\cda.c(62,40): warning :                                         ^
+D:\code\CS201\Assign1\Assign1\cda.c(73,39): warning : conversion to 'long unsigned int' from 'int' may change the sign of the result [-Wsign-conversion]
+D:\code\CS201\Assign1\Assign1\cda.c(73,39): warning :    items->arr = malloc((sizeof(void*)) * (items->cap / 2));
+D:\code\CS201\Assign1\Assign1\cda.c(73,39): warning :                                        ^
+  cell.c
+  da.c
+D:\code\CS201\Assign1\Assign1\da.c(56,40): warning : conversion to 'long unsigned int' from 'int' may change the sign of the result [-Wsign-conversion]
+D:\code\CS201\Assign1\Assign1\da.c(56,40): warning :    items->arr = malloc((sizeof(void *)) * items->cap);
+D:\code\CS201\Assign1\Assign1\da.c(56,40): warning :                                         ^
+D:\code\CS201\Assign1\Assign1\da.c(67,39): warning : conversion to 'long unsigned int' from 'int' may change the sign of the result [-Wsign-conversion]
+D:\code\CS201\Assign1\Assign1\da.c(67,39): warning :    items->arr = malloc((sizeof(void *) * items->cap));
+D:\code\CS201\Assign1\Assign1\da.c(67,39): warning :                                        ^
+  maze.c
+D:\code\CS201\Assign1\Assign1\maze.c(31,37): warning : conversion to 'long unsigned int' from 'int' may change the sign of the result [-Wsign-conversion]
+D:\code\CS201\Assign1\Assign1\maze.c(31,37): warning :   maze->arr = malloc(sizeof(CELL **) * maze->h);
+D:\code\CS201\Assign1\Assign1\maze.c(31,37): warning :                                      ^
+D:\code\CS201\Assign1\Assign1\maze.c(33,40): warning : conversion to 'long unsigned int' from 'int' may change the sign of the result [-Wsign-conversion]
+D:\code\CS201\Assign1\Assign1\maze.c(33,40): warning :    maze->arr[i] = malloc(sizeof(CELL *) * maze->w);
+D:\code\CS201\Assign1\Assign1\maze.c(33,40): warning :                                         ^
+D:\code\CS201\Assign1\Assign1\maze.c(93,6): warning : unused variable 'col' [-Wunused-variable]
+D:\code\CS201\Assign1\Assign1\maze.c(93,6): warning :   int col = getCol(cell);
+D:\code\CS201\Assign1\Assign1\maze.c(93,6): warning :       ^
+D:\code\CS201\Assign1\Assign1\maze.c(92,6): warning : unused variable 'row' [-Wunused-variable]
+D:\code\CS201\Assign1\Assign1\maze.c(92,6): warning :   int row = getRow(cell);
+D:\code\CS201\Assign1\Assign1\maze.c(92,6): warning :       ^
+D:\code\CS201\Assign1\Assign1\maze.c(116,6): warning : unused variable 'col' [-Wunused-variable]
+D:\code\CS201\Assign1\Assign1\maze.c(116,6): warning :   int col = getCol(cell);
+D:\code\CS201\Assign1\Assign1\maze.c(116,6): warning :       ^
+D:\code\CS201\Assign1\Assign1\maze.c(115,6): warning : unused variable 'row' [-Wunused-variable]
+D:\code\CS201\Assign1\Assign1\maze.c(115,6): warning :   int row = getRow(cell);
+D:\code\CS201\Assign1\Assign1\maze.c(115,6): warning :       ^
+D:\code\CS201\Assign1\Assign1\maze.c(261,10): warning : conversion to 'unsigned int' from 'int' may change the sign of the result [-Wsign-conversion]
+D:\code\CS201\Assign1\Assign1\maze.c(261,10): warning :   srandom(seed);
+D:\code\CS201\Assign1\Assign1\maze.c(261,10): warning :           ^
+D:\code\CS201\Assign1\Assign1\maze.c(267,13): warning : conversion to 'int' from 'long int' may alter its value [-Wconversion]
+D:\code\CS201\Assign1\Assign1\maze.c(267,13): warning :     choice = random() % count;
+D:\code\CS201\Assign1\Assign1\maze.c(267,13): warning :              ^
+D:\code\CS201\Assign1\Assign1\maze.c(286,10): warning : variable 'count' set but not used [-Wunused-but-set-variable]
+D:\code\CS201\Assign1\Assign1\maze.c(286,10): warning :   int     count = 0;
+D:\code\CS201\Assign1\Assign1\maze.c(286,10): warning :           ^
+D:\code\CS201\Assign1\Assign1\maze.c(285,10): warning : unused variable 'choice' [-Wunused-variable]
+D:\code\CS201\Assign1\Assign1\maze.c(285,10): warning :   int     choice = 0;
+D:\code\CS201\Assign1\Assign1\maze.c(285,10): warning :           ^
+D:\code\CS201\Assign1\Assign1\maze.c(284,10): warning : unused variable 'adjacent' [-Wunused-variable]
+D:\code\CS201\Assign1\Assign1\maze.c(284,10): warning :   CELL *  adjacent[3];
+D:\code\CS201\Assign1\Assign1\maze.c(284,10): warning :           ^
+  queue.c
+  stack.c
+  Linking objects
+  Assign1.vcxproj -> D:\code\CS201\Assign1\Assign1\bin\x64\Debug\Assign1.out

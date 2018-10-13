@@ -16,11 +16,9 @@
 typedef struct maze MAZE;
 
 extern MAZE *newMAZE(int, int);
-extern void  createMAZE(MAZE *, int);
+extern void  createMAZE(MAZE *);
 extern void  solveMAZE(MAZE *);
 extern void  writeMAZE(MAZE *, FILE *);
-extern MAZE *readMAZE(FILE *);
 extern void  drawMAZE(MAZE *, FILE *);
-extern void  freeMAZE(MAZE *);
 
 #endif
