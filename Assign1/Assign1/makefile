@@ -1,26 +1,29 @@
-SOBJS = da.o stack.o
-QOBJS = cda.o queue.o
-MOBJS = amaze.o maze.o cell.o
 COPTS = -Wall -Wextra -std=c99
+SOBJS = stack.o da.o
+QOBJS = queue.o cda.o
+MOBJS = maze.o cell.o
 
 all: amaze
 
 test: all
-	@echo creating test maze...
-	./amaze -c 10 10 m -r 2
-	@echo solving  test maze...
-	./amaze -s m m
-	@echo drawing  test maze...
-	./amaze -d m
-	
+	@echo testing maze...
+	./amaze -c 10 10 m -d m -r 2
+	./amaze -s m m -d m
+
 valgrind: all
-	valgrind ./amaze -c 10 10 m -r 2
+	valgrind ./amaze -c 10 10 m
 	
 clean:
-	rm -f $(SOBJS) $(QOBJS) $(MOBJS) amaze
+	rm -f $(QOBJS) $(SOBJS) $(MOBJS) amaze.o amaze m
 	
-amaze: $(MOBJS) $(SOBJS) $(QOBJS)
-	gcc $(COPTS) $(MOBJS) $(SOBJS) $(QOBJS) -o amaze
+amaze: $(QOBJS) $(SOBJS) $(MOBJS) amaze.c
+	gcc $(COPTS) $(QOBJS) $(MOBJS) $(SOBJS) -o amaze amaze.c
+	
+maze.o: maze.c maze.h cell.h stack.h queue.h
+	gcc $(COPTS) -c maze.c
+
+cell.o: cell.c cell.h
+	gcc $(COPTS) -c cell.c
 	
 da.o: da.c da.h
 	gcc $(COPTS) -c da.c
@@ -33,6 +36,3 @@ stack.o: stack.c stack.h da.h
 	
 queue.o: queue.c queue.h cda.h
 	gcc $(COPTS) -c queue.c
-	
-maze.o: maze.c cell.c maze.h cell.h $(SOBJS $(QOBJS)
-	gcc $(COPTS) -c maze.c
