@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "bst.h"
+#include "queue.h"
 
 struct bst {
 	void (*swap)    (void *v1, void *v2);
@@ -83,6 +84,20 @@ int maxDepth(TNODE *node) {
 		return max(maxDepth(getTNODEleft(node)), maxDepth(getTNODEright(node))) + 1;
 	}
 	return 0;
+}
+
+void levelOrder(QUEUE *queue, TNODE *n) {
+	int height = maxDepth(n);
+	if (height == 1) {
+		enqueue(queue, n);
+		return;
+	}
+	if (getTNODEleft(n)) {
+		levelOrder(queue, getTNODEleft(n));
+	}
+	if (getTNODEright(n)) {
+		levelOrder(queue, getTNODEright(n));
+	}
 }
 
 //END UTILITY FUNCS ////////////////////////////////////////////////////////////////
@@ -263,5 +278,29 @@ void statisticsBST(BST *t, FILE *fp) {
 		return;
 	}
 	fprintf(fp, "Nodes: %d\nMinimum depth: %d\nMaximum depth: %d\n", size, minDepth(t->root), maxDepth(t->root));
+	return;
+}
+
+void displayBST(BST *t, FILE *fp) {
+	if (getBSTroot(t) == 0) {
+		fprintf(fp, "0\n");
+		return;
+	}
+	QUEUE *traversal = newQUEUE();
+	if (t->debug == 1) {
+		//in order
+	}
+	if (t->debug == 2) {
+		//pre order
+	}
+	if (t->debug == 3) {
+		//post order
+	}
+	levelOrder(traversal, getBSTroot(t));
+
+	for (int i = 0; i < maxDepth(getBSTroot(t)); i++) {
+		fprintf(fp, "0: ");
+		t->display(dequeue(traversal), fp);
+	}
 	return;
 }
