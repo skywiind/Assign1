@@ -134,8 +134,11 @@ void insertCDA(CDA *items, int index, void *value) {
 /*Method to remove items from the CDA. Manages memory using a temp array,
   removes, shifting based on efficiency. Returns the removed item.*/
 void *removeCDA(CDA *items, int index) {
-	assert(items->size != 0);
-	assert(index >= 0 && index < items->size);
+
+	assert(index >= 0);
+	if (index > items->size) {
+		return NULL;
+	}
 	void *removed = items->arr[indexCDA(items, index)];
 
 	//Remove at front

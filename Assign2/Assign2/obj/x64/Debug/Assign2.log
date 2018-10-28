@@ -1,0 +1,8 @@
+﻿  Validating sources
+  Copying sources remotely to 'localhost'
+  Validating architecture
+  Starting remote build
+  Compiling sources:
+  bst.c
+  Linking objects
+  Assign2.vcxproj -> D:\code\CS201\Assign2\Assign2\bin\x64\Debug\Assign2.out

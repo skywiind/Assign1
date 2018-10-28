@@ -14,7 +14,7 @@
 #include "queue.h"
 
 struct bst {
-	void (*swap)    (void *v1, void *v2);
+	void (*swap)    (TNODE *v1, TNODE *v2);
 	int  (*compare) (void *v1, void *v2);
 	void (*display) (void *value, FILE *fp);
 	void (*free)    (void *value);
@@ -33,6 +33,9 @@ void swapNodes(TNODE *val1, TNODE *val2) {
 }
 
 int isLeaf(TNODE *n) {
+	if (!n) {
+		return 0;
+	}
 	if (getTNODEleft(n) == 0 && getTNODEright(n) == 0) {
 		return 1;
 	}
@@ -46,6 +49,7 @@ int min(int val1, int val2) {
 	if (val2 > val1) {
 		return val1;
 	}
+	return -1;
 }
 
 int minDepth(TNODE *node) {
@@ -65,6 +69,7 @@ int max(int val1, int val2) {
 	if (val2 > val1) {
 		return val2;
 	}
+	return -1;
 }
 
 int maxDepth(TNODE *node) {
@@ -86,17 +91,135 @@ int maxDepth(TNODE *node) {
 	return 0;
 }
 
-void levelOrder(QUEUE *queue, TNODE *n) {
-	int height = maxDepth(n);
-	if (height == 1) {
-		enqueue(queue, n);
-		return;
+int isLeftChild(TNODE *n) {
+	if (!n) {
+		return 0;
 	}
+	if (getTNODEleft(getTNODEparent(n)) == n) {
+		return 1;
+	}
+	return 0;
+}
+
+int isRightChild(TNODE *n) {
+	if (!n) {
+		return 0;
+	}
+	if (getTNODEright(getTNODEparent(n)) == n) {
+		return 1;
+	}
+	return 0;
+}
+
+void levelOrderDisplay(TNODE *n, FILE *fp) {
+	QUEUE *queue = newQUEUE();
+	TNODE *temp = n;
+	int i = 0;
+	int l = 0;
+	int c = 1;
+	while (l != maxDepth(n) + 2) {
+		if (i == 0) {
+			fprintf(fp, "%d : ", l);
+			l++;
+		}
+		else if (i == c) {
+			fprintf(fp, "\n%d : ", l);
+			c *= 2;
+			l++;
+			i = 0;
+		}
+		if (temp) {
+			if (isLeaf(temp) == 1) {
+				fprintf(fp, "=");
+			}
+			displayTNODE(temp, fp);
+			fprintf(fp, "(");
+			displayTNODE(getTNODEparent(temp), fp);
+			fprintf(fp, ")");
+			if (i == 0 && l == 1) {
+				fprintf(fp, "X ");
+			}
+			else if (isLeftChild(temp) == 1) {
+				fprintf(fp, "L ");
+			}
+			else if (isRightChild(temp) == 1) {
+				fprintf(fp, "R ");
+			}
+			enqueue(queue, getTNODEleft(temp));
+			enqueue(queue, getTNODEright(temp));
+		}
+		else {
+			enqueue(queue, NULL);
+			enqueue(queue, NULL);
+		}
+		temp = dequeue(queue);
+		i++;
+	}
+	freeQUEUE(queue);
+	return;
+}
+
+void inOrderDisplay(BST *t, TNODE *n, FILE *fp) {
 	if (getTNODEleft(n)) {
-		levelOrder(queue, getTNODEleft(n));
+		fprintf(fp, "[");
+		inOrderDisplay(t, getTNODEleft(n), fp);
+		fprintf(fp, "] ");	
+	}
+	if (n) {
+		setTNODEdisplay(n, t->display);
+		displayTNODE(n, fp);
 	}
 	if (getTNODEright(n)) {
-		levelOrder(queue, getTNODEright(n));
+		fprintf(fp, " [");
+		inOrderDisplay(t, getTNODEright(n), fp);
+		fprintf(fp, "]");
+	}
+}
+
+void preOrderDisplay(BST *t, TNODE *n, FILE *fp) {
+	if (n) {
+		setTNODEdisplay(n, t->display);
+		displayTNODE(n, fp);
+	}
+	if (getTNODEleft(n)) {
+		fprintf(fp, " [");
+		preOrderDisplay(t, getTNODEleft(n), fp);
+		fprintf(fp, "]");
+	}
+	if (getTNODEright(n)) {
+		fprintf(fp, " [");
+		preOrderDisplay(t, getTNODEright(n), fp);
+		fprintf(fp, "]");
+	}
+}
+
+void postOrderDisplay(BST *t, TNODE *n, FILE *fp) {
+	if (getTNODEleft(n)) {
+		fprintf(fp, "[");
+		postOrderDisplay(t, getTNODEleft(n), fp);
+		fprintf(fp, "] ");
+	}
+	if (getTNODEright(n)) {
+		fprintf(fp, "[");
+		postOrderDisplay(t, getTNODEright(n), fp);
+		fprintf(fp, "] ");
+	}
+	if (n) {
+		setTNODEdisplay(n, t->display);
+		displayTNODE(n, fp);
+	}
+}
+
+void postOrderFree(BST *t, TNODE *n) {
+	if (getTNODEleft(n)) {
+		postOrderFree(t, getTNODEleft(n));
+	}
+	if (getTNODEright(n)) {
+		postOrderFree(t, getTNODEright(n));
+	}
+	if (n) {
+		setTNODEfree(n, t->free);
+		freeTNODE(n);
 	}
 }
 
@@ -104,6 +227,7 @@ void levelOrder(QUEUE *queue, TNODE *n) {
 
 BST *newBST(int(*c) (void *, void*)) {
 	BST *tree     = malloc(sizeof(BST));
+	tree->root    = 0;
 	tree->size    = 0;
 	tree->debug   = 0;
 	tree->swap    = swapNodes;
@@ -118,7 +242,7 @@ void setBSTdisplay(BST *t, void (*d)(void *, FILE *)) {
 	return;
 }
 
-void setBSTswapper(BST *t, void (*s)(void *, FILE *)) {
+void setBSTswapper(BST *t, void (*s)(TNODE *, TNODE *)) {
 	t->swap = s;
 	return;
 }
@@ -149,23 +273,36 @@ TNODE *insertBST(BST *t, void *value) {
 		setTNODEdisplay(newNode, t->display);
 	}
 	if (node == 0) {
+		setTNODEparent(newNode, newNode);
 		t->root = newNode;
 		setBSTsize(t, 1);
 		return newNode;
 	}
 	while (node != 0) {
 		int c = t->compare(getTNODEvalue(node), value);
-		if (c < 0 && getTNODEleft(node) == 0) {
+		if (c > 0 && getTNODEleft(node) == 0) {
 			setTNODEleft(node, newNode);
+			setTNODEparent(newNode, node);
 			setBSTsize(t, t->size + 1);
 			return newNode;
 		}
-		if (c > 0 && getTNODEright(node) == 0) {
+		if (c < 0 && getTNODEright(node) == 0) {
 			setTNODEright(node, newNode);
+			setTNODEparent(newNode, node);
 			setBSTsize(t, t->size + 1);
 			return newNode;
+		}
+		if (c > 0) {
+			node = getTNODEleft(node);
+		}
+		if (c < 0) {
+			node = getTNODEright(node);
+		}
+		if (c == 0) {
+			return NULL;
 		}
 	}
+	return NULL;
 }
 
 void *findBST(BST *t, void *value) {
@@ -257,6 +394,9 @@ TNODE *swapToLeafBST(BST *t, TNODE *node) {
 
 void pruneLeafBST(BST *t, TNODE *leaf) {
 	TNODE *parent = getTNODEparent(leaf);
+	if (getBSTroot(t) == leaf) {
+		return;
+	}	
 	if (leaf == getTNODEleft(parent)) {
 		setTNODEleft(parent, 0);
 		return;
@@ -286,21 +426,39 @@ void displayBST(BST *t, FILE *fp) {
 		fprintf(fp, "0\n");
 		return;
 	}
-	QUEUE *traversal = newQUEUE();
-	if (t->debug == 1) {
-		//in order
-	}
-	if (t->debug == 2) {
-		//pre order
-	}
-	if (t->debug == 3) {
-		//post order
-	}
-	levelOrder(traversal, getBSTroot(t));
 
-	for (int i = 0; i < maxDepth(getBSTroot(t)); i++) {
-		fprintf(fp, "0: ");
-		t->display(dequeue(traversal), fp);
+	if (t->debug > 0 && t->root == NULL) {
+		fprintf(fp, "[]\n");
+		return;
+	}
+	else if (t->debug == 1) {
+		fprintf(fp, "[");
+		inOrderDisplay(t, t->root, fp);
+		fprintf(fp, "]\n");
+	}
+	else if (t->debug == 2) {
+		fprintf(fp, "[");
+		preOrderDisplay(t, t->root, fp);
+		fprintf(fp, "]\n");
+	}
+	else if (t->debug == 3) {
+		fprintf(fp, "[");
+		postOrderDisplay(t, t->root, fp);
+		fprintf(fp, "]\n");
+	}
+	else {
+		levelOrderDisplay(getBSTroot(t), fp);
 	}
 	return;
+}
+
+int debugBST(BST *t, int level) {
+	int temp = t->debug;
+	t->debug = level;
+	return temp;
+}
+
+void freeBST(BST *t) {
+	postOrderFree(t, t->root);
+	free(t);
 }

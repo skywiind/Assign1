@@ -60,7 +60,6 @@ void enqueue(QUEUE *items, void *value) {
 /*Method to dequeue an item from the QUEUE. Uses the underlying data structure's
   removal method. Returns the dequeued item.*/
 void *dequeue(QUEUE *items) {
-	assert(sizeCDA(items->data) != 0);
 	return removeCDAfront(items->data);
 }
 

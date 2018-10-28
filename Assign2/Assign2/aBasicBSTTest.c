@@ -9,7 +9,7 @@ int main() {
 
 	BST *tree = newBST(compareINTEGER);
 	setBSTdisplay(tree, displayINTEGER);
-	setBSTfree(freeINTEGER);
+	setBSTfree(tree, freeINTEGER);
 
 	printf("Generating values...\n");
 
@@ -35,6 +35,7 @@ int main() {
 
 	printf("Displaying tree...\n");
 	displayBST(tree, stdout);
+	printf("\n");
 
 	return 0;
 

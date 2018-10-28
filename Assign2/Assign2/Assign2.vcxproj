@@ -76,12 +76,23 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <ClInclude Include="bst.h" />
+    <ClInclude Include="cda.h" />
+    <ClInclude Include="integer.h" />
+    <ClInclude Include="queue.h" />
+    <ClInclude Include="real.h" />
     <ClInclude Include="scanner.h" />
+    <ClInclude Include="string.h" />
     <ClInclude Include="tnode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bst.c" />
+    <ClCompile Include="cda.c" />
+    <ClCompile Include="integer.c" />
+    <ClCompile Include="queue.c" />
+    <ClCompile Include="real.c" />
     <ClCompile Include="scanner.c" />
+    <ClCompile Include="string.c" />
+    <ClCompile Include="tester.c" />
     <ClCompile Include="tnode.c" />
   </ItemGroup>
   <ItemDefinitionGroup />

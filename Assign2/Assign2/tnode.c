@@ -24,11 +24,7 @@ struct tnode {
 
 TNODE *newTNODE(void *v, TNODE *p, TNODE *r, TNODE *l) {
 	TNODE *node = malloc(sizeof(TNODE));
-	node->v = malloc(sizeof(void *));
-	node->p = malloc(sizeof(TNODE));
-	node->r = malloc(sizeof(TNODE));
-	node->l = malloc(sizeof(TNODE));
-	assert(node != 0 && node->v != 0 && node->p != 0 && node->r != 0 && node->l != 0);
+	assert(node != 0);
 	node->d = 0;
 	node->display = 0;
 	node->free = 0;
@@ -89,6 +85,10 @@ void displayTNODE(TNODE *n, FILE *fp) {
 	if (n->display == NULL) {
 		fprintf(fp, "&%p", n->v);
 	}
+	else if (n->d > 0){
+		n->display(n->v, fp);
+		fprintf(fp, "&%p", n->v);
+	}
 	else {
 		n->display(n->v, fp);
 	}
@@ -102,11 +102,9 @@ int debugTNODE(TNODE *n, int level) {
 }
 
 void freeTNODE(TNODE *n) {
-	free(n->p);
-	free(n->r);
-	free(n->l);
 	if (n->free != 0) {
 		n->free(n->v);
 	}
 	free(n);
+	return;
 }
