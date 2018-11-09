@@ -226,7 +226,22 @@ void insertFixup(RBT *t, TNODE *inserted) {
 }
 
 void deleteFixup(RBT *t, TNODE *deleted) {
-
+	TNODE *x = deleted;
+	while (getRBTroot(t) != x) {
+		if (getNodeColor(x) == 0) {
+			break;
+		}
+		if (getNodeColor(getSibling(x)) == 0) {
+			setNodeColor(getTNODEparent(x), 0);
+			setNodeColor(getSibling(x), 0);
+			if (isNodeLeft(getSibling(x)) == 1) {
+				rotateRight(t, getSibling(x));
+			}
+			else {
+				rotateLeft(t, getSibling(x));
+			}
+		}
+	}
 }
 
 //END UTILITY FUNCS ////////////////////////////////////////////////////////////////
