@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "bst.h"
-//#include "gst.h"
+#include "gst.h"
 //#include "rbt.h"
 #include "tnode.h"
 #include "integer.h"
@@ -10,7 +10,7 @@
 #include "real.h"
 
 #define TREESIZE 5
-#define USEBST
+#define USEGST
 #define INTEGER
 
 #ifdef USERBT

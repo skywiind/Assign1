@@ -43,23 +43,17 @@ int isLeaf(TNODE *n) {
 }
 
 int min(int val1, int val2) {
-	if (val1 > val2) {
-		return val2;
-	}
-	if (val2 > val1) {
-		return val1;
-	}
-	return -1;
+	return (val1 < val2) ? val1 : val2;
 }
 
 int minDepth(TNODE *node) {
-	if (node == 0) {
-		return -1;
+	if (node == NULL) {
+		return 0;
 	}
-	if (getTNODEleft(node) && getTNODEright(node)) {
-		return min(minDepth(getTNODEleft(node)), minDepth(getTNODEright(node))) + 1;
+	if (getTNODEleft(node) == NULL || getTNODEright(node) == NULL) {
+		return 1;
 	}
-	return 0;
+	return min(minDepth(getTNODEleft(node)), minDepth(getTNODEright(node))) + 1;
 }
 
 int max(int val1, int val2) {
@@ -113,22 +107,37 @@ int isRightChild(TNODE *n) {
 
 void levelOrderDisplay(TNODE *n, FILE *fp) {
 	QUEUE *queue = newQUEUE();
-	TNODE *temp = n;
+	TNODE *temp;
 	int i = 0;
 	int l = 0;
-	int c = 1;
-	while (l != maxDepth(n) + 2) {
-		if (i == 0) {
-			fprintf(fp, "%d : ", l);
-			l++;
+
+	fprintf(fp, "%d : ", l);
+	l++;
+
+	if (n == NULL) {
+		//print empty
+	}
+	else {
+		enqueue(queue, n);
+		enqueue(queue, NULL);
+	}
+
+	while (sizeQUEUE(queue) > 0) {
+		temp = dequeue(queue);
+		if (temp == NULL) {
+			fprintf(fp, "\n");
+			if (sizeQUEUE(queue) != 0) {
+				fprintf(fp, "%d : ", l);
+				l++;
+				if (peekQUEUE(queue) != NULL) {
+					enqueue(queue, NULL);
+				}
+				else {
+					break;
+				}
+			}
 		}
-		else if (i == c) {
-			fprintf(fp, "\n%d : ", l);
-			c *= 2;
-			l++;
-			i = 0;
-		}
-		if (temp) {
+		else {
 			if (isLeaf(temp) == 1) {
 				fprintf(fp, "=");
 			}
@@ -145,15 +154,9 @@ void levelOrderDisplay(TNODE *n, FILE *fp) {
 			else if (isRightChild(temp) == 1) {
 				fprintf(fp, "R ");
 			}
-			enqueue(queue, getTNODEleft(temp));
-			enqueue(queue, getTNODEright(temp));
+			if (getTNODEleft(temp) != NULL) enqueue(queue, getTNODEleft(temp));
+			if (getTNODEright(temp) != NULL) enqueue(queue, getTNODEright(temp));
 		}
-		else {
-			enqueue(queue, NULL);
-			enqueue(queue, NULL);
-		}
-		temp = dequeue(queue);
-		i++;
 	}
 	freeQUEUE(queue);
 	return;
@@ -163,7 +166,7 @@ void inOrderDisplay(BST *t, TNODE *n, FILE *fp) {
 	if (getTNODEleft(n)) {
 		fprintf(fp, "[");
 		inOrderDisplay(t, getTNODEleft(n), fp);
-		fprintf(fp, "] ");	
+		fprintf(fp, "] ");
 	}
 	if (n) {
 		setTNODEdisplay(n, t->display);
