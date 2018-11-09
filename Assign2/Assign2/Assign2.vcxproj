@@ -80,6 +80,7 @@
     <ClInclude Include="gst.h" />
     <ClInclude Include="integer.h" />
     <ClInclude Include="queue.h" />
+    <ClInclude Include="rbt.h" />
     <ClInclude Include="real.h" />
     <ClInclude Include="scanner.h" />
     <ClInclude Include="string.h" />
@@ -91,6 +92,7 @@
     <ClCompile Include="gst.c" />
     <ClCompile Include="integer.c" />
     <ClCompile Include="queue.c" />
+    <ClCompile Include="rbt.c" />
     <ClCompile Include="real.c" />
     <ClCompile Include="scanner.c" />
     <ClCompile Include="string.c" />
