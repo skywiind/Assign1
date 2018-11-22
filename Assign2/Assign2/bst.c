@@ -46,7 +46,7 @@ int min(int val1, int val2) {
 	return (val1 < val2) ? val1 : val2;
 }
 
-int minDepth(TNODE *node) {
+/*int minDepth(TNODE *node) {
 	if (node == NULL) {
 		return 0;
 	}
@@ -54,19 +54,53 @@ int minDepth(TNODE *node) {
 		return 1;
 	}
 	return min(minDepth(getTNODEleft(node)), minDepth(getTNODEright(node))) + 1;
+}*/
+
+int minDepth(TNODE *n) {
+	if (!n) {
+		return 0;
+	}
+	if (isLeaf(n)) {
+		return 1;
+	}
+	if (getTNODEleft(n) == NULL) {
+		return minDepth(getTNODEright(n)) + 1;
+	}
+	if (getTNODEright(n) == NULL) {
+		return minDepth(getTNODEleft(n)) + 1;
+	}
+
+	return min(minDepth(getTNODEleft(n)), minDepth(getTNODEright(n))) + 1;
 }
 
 int max(int val1, int val2) {
-	if (val1 > val2) {
-		return val1;
-	}
-	if (val2 > val1) {
-		return val2;
-	}
-	return -1;
+	return (val1 > val2) ? val1 : val2;
 }
 
-int maxDepth(TNODE *node) {
+int maxDepth(TNODE *n) {
+	int l = 0;
+	int r = 0;
+	int d = 0;
+
+	if (!n) {
+		return 0;
+	}
+
+	else {
+		l = maxDepth(getTNODEleft(n));
+		r = maxDepth(getTNODEright(n));
+
+		if (r > l) {
+			d = r + 1;
+		}
+		else {
+			d = l + 1;
+		}
+	}
+	return d;
+}
+
+/*int maxDepth(TNODE *node) {
 	if (node == 0) {
 		return -1;
 	}
@@ -83,7 +117,7 @@ int maxDepth(TNODE *node) {
 		return max(maxDepth(getTNODEleft(node)), maxDepth(getTNODEright(node))) + 1;
 	}
 	return 0;
-}
+}*/
 
 int isLeftChild(TNODE *n) {
 	if (!n) {
@@ -319,10 +353,10 @@ void *findBST(BST *t, void *value) {
 			return getTNODEvalue(node);
 		}
 		else {
-			if (c < 0) {
+			if (c > 0) {
 				node = getTNODEleft(node);
 			}
-			if (c > 0) {
+			if (c < 0) {
 				node = getTNODEright(node);
 			}
 		}
@@ -341,10 +375,10 @@ TNODE *locateBST(BST *t, void *value) {
 			return node;
 		}
 		else {
-			if (c < 0) {
+			if (c > 0) {
 				node = getTNODEleft(node);
 			}
-			if (c > 0) {
+			if (c < 0) {
 				node = getTNODEright(node);
 			}
 		}

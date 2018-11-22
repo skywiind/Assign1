@@ -34,22 +34,27 @@ struct gnode {
 //UTILITY FUNCTIONS ////////////////////////////////////////////////////////////////
 
 void displayGNODE(void *v, FILE *fp) {
-
 	GNODE *temp = v;
 	if (temp == NULL) {
 		return;
 	}
 	temp->display(temp->v, fp);
-	if (temp->f > 1) {
-		fprintf(fp, "<%d> ", temp->f);
+	GNODE *test = temp->v;
+	if (test->f > 1) {
+		fprintf(fp, "<%d>", test->f);
 	}
+	/*
+	if (temp->f > 1) {
+		fprintf(fp, "<%d>", temp->f);
+	}
+	*/
 	return;
 }
 
 int compareGNODE(void *v, void *w) {
 	GNODE *a = v;
 	GNODE *b = w;
-	return a->compare(a->v, b->v);
+	return b->compare(a->v, b->v);
 }
 
 void freeGNODE(void *n) {
@@ -125,10 +130,11 @@ TNODE *insertGST(GST *t, void *value) {
 	newNode->free    = t->free;
 
 	if (findBST(t->tree, newNode)) {
-		TNODE *temp = locateGST(t, value);
+		TNODE *temp = locateGST(t, newNode);
 		GNODE *unwrap = unwrapGST(temp);
 		unwrap->f++;
 		t->d++;
+		freeGNODE(newNode);
 		return temp;
 	}
 
@@ -150,7 +156,7 @@ int deleteGST(GST *t, void *key) {
 	}
 	if (temp->f > 1) {
 		temp->f--;
-		return 0;
+		return temp->f;
 	}
 	else {
 		return deleteBST(t->tree, key);
@@ -192,6 +198,9 @@ int debugGST(GST *t, int level) {
 }
 
 void *unwrapGST(TNODE *node) {
+	if (!node) {
+		return NULL;
+	}
 	GNODE *temp = getTNODEvalue(node);
 	return temp->v;
 }

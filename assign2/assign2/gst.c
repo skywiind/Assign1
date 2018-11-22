@@ -34,15 +34,20 @@ struct gnode {
 //UTILITY FUNCTIONS ////////////////////////////////////////////////////////////////
 
 void displayGNODE(void *v, FILE *fp) {
-
 	GNODE *temp = v;
 	if (temp == NULL) {
 		return;
 	}
 	temp->display(temp->v, fp);
-	if (temp->f > 1) {
-		fprintf(fp, "<%d> ", temp->f);
+	GNODE *test = temp->v;
+	if (test->f > 1) {
+		fprintf(fp, "<%d>", test->f);
 	}
+	/*
+	if (temp->f > 1) {
+		fprintf(fp, "<%d>", temp->f);
+	}
+	*/
 	return;
 }
 

@@ -105,7 +105,7 @@ int main(void) {
 	for (int i = 0; i < TREESIZE; ++i) {
 		insertSTRUCTURE(tree, newDATA(array[i]));
 	}
-	displayTree(tree);
+ 	displayTree(tree);
 	//displayTree(tree);
 
 	//for (int i = TREESIZE - 1; i >= 0; --i) {

@@ -3,6 +3,6 @@
   Validating architecture
   Starting remote build
   Compiling sources:
-  rbt.c
+  gst.c
   Linking objects
   Assign2.vcxproj -> D:\code\CS201\Assign2\Assign2\bin\x64\Debug\Assign2.out

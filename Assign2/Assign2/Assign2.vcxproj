@@ -98,6 +98,7 @@
     <ClCompile Include="string.c" />
     <ClCompile Include="tester.c" />
     <ClCompile Include="tnode.c" />
+    <ClCompile Include="trees.c" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
