@@ -477,28 +477,40 @@ TNODE *insertRBT(RBT *t, void *v) {
 }
 
 void *findRBT(RBT *t, void *key) {
-	return unwrapRBT(findGST(t->tree, key));
+	RBNODE *temp  = newRBNODE(key);
+	temp->display = t->display;
+	temp->compare = compareShitstorm;
+	temp->free    = t->free;
+	void *ans     = findGST(t->tree, temp);
+	free(temp);
+	return ans;
 }
 
 TNODE *locateRBT(RBT *t, void *key) {
-	return locateGST(t->tree, key);
+	RBNODE *temp  = newRBNODE(key);
+	temp->display = t->display;
+	temp->compare = compareShitstorm;
+	temp->free    = t->free;
+	TNODE *ans    = locateGST(t->tree, temp);
+	free(temp);
+	return ans;
 }
 
 int deleteRBT(RBT *t, void *key) {
-	TNODE *node = locateRBT(t, key);
-	RBNODE *temp = unwrapRBT(node);
-	int f = freqGST(t->tree, key);
+	TNODE *temp = locateRBT(t, key);
 	if (!temp) {
 		return -1;
 	}
+	int f = freqGST(t->tree, key);
+	RBNODE *unwrap = getTNODEvalue(temp);
 	else if (f > 1) {
 		deleteGST(t->tree, key);
 		return f - 1;
 	}
 	else {
-		swapToLeafGST(t->tree, node);
-		deleteFixup(t, node);
-		pruneLeafGST(t->tree, node);
+		swapToLeafGST(t->tree, temp);
+		deleteFixup(t, temp);
+		pruneLeafGST(t->tree, temp);
 		return 0;
 	}
 	return -1;
@@ -541,6 +553,10 @@ void *unwrapRBT(TNODE *n) {
 }
 
 int freqRBT(RBT *g, void *key) {
+	TNODE *temp = locateRBT(g, key);
+	if (temp) {
+		RBNODE *unwrap = getTNODEvalue(temp);
+	}
 	return freqGST(g->tree, key);
 }
 

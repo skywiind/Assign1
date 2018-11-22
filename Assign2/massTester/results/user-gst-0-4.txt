@@ -19,7 +19,7 @@ debug (in-order): [3]
 debug (pre-order): [3]
 debug (post-order): [3]
 size is 1
-Duplicates: 3
+Duplicates: 0
 Nodes: 1
 Minimum depth: 0
 Maximum depth: 0

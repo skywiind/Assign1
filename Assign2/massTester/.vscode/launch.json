@@ -8,11 +8,11 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/mnt/d/code/cs201/assign2/massTester/working/assign",
-            //"program": "/mnt/d/code/cs201/assign2/massTester/working/assign",
+            "program": "/mnt/c/Users/Wyatt/Documents/S/CS201/Assign2/massTester/working/assign",
+            //"program": "/mnt/d/code/cs201/assign2/massTester/working/Assign",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "/mnt/d/code/cs201/assign2/massTester/working",
+            "cwd": "/mnt/c/Users/Wyatt/Documents/S/CS201/Assign2/massTester/working",
             "environment": [],
             "externalConsole": true,
             //"MIMode": "gdb",
@@ -31,7 +31,7 @@
                 }
             ],
             "sourceFileMap": {
-                "/mnt/d": "d:\\"
+                "/mnt/c": "c:\\"
             }
         }
     ]

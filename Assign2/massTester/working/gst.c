@@ -18,7 +18,7 @@ struct gst {
 	void (*free) (void *value);
 	void (*swap) (TNODE *v1, TNODE *v2);
 	int  (*compare) (void *v1, void *v2);
-	int d;
+	int i;
 };
 
 typedef struct gnode GNODE;
@@ -89,7 +89,7 @@ GST *newGST(int(*c)(void *, void *)) {
 	newTree->free    = 0;
 	newTree->compare = c;
 	newTree->swap    = swapper;
-	newTree->d       = 0;
+	newTree->i       = 0;
 	return newTree;
 }
 
@@ -132,11 +132,11 @@ TNODE *insertGST(GST *t, void *value) {
 		TNODE *temp = locateGST(t, value);
 		GNODE *unwrap = getTNODEvalue(temp);
 		unwrap->f++;
-		t->d++;
 		freeGNODE(newNode);
+		t->i++;
 		return temp;
 	}
-
+	t->i++;
 	return insertBST(t->tree, newNode);
 }
 
@@ -168,12 +168,11 @@ int deleteGST(GST *t, void *key) {
 	GNODE *unwrap = getTNODEvalue(temp);
 	if (unwrap->f > 1) {
 		unwrap->f--;
-		if (unwrap->f == 1) {
-			t->d--;
-		}
+		t->i--;
 		return unwrap->f;
 	}
 	else {
+		t->i--;
 		return deleteBST(t->tree, unwrap);
 	}
 	return -1;
@@ -192,7 +191,7 @@ int sizeGST(GST *t) {
 }
 
 void statisticsGST(GST *t, FILE *fp) {
-	fprintf(fp, "Duplicates: %d\n", t->d);
+	fprintf(fp, "Duplicates: %d\n", (duplicatesGST(t)));
 	statisticsBST(t->tree, fp);
 	return;
 }
@@ -230,5 +229,5 @@ int freqGST(GST *g, void *key) {
 }
 
 int duplicatesGST(GST *g) {
-	return g->d;
+	return g->i - sizeBST(g->tree);
 }
