@@ -183,6 +183,7 @@ TNODE *swapToLeafGST(GST *t, TNODE *node) {
 }
 
 void pruneLeafGST(GST *t, TNODE *leaf) {
+	t->i--;
 	return pruneLeafBST(t->tree, leaf);
 }
 

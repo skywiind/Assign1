@@ -502,16 +502,21 @@ int deleteRBT(RBT *t, void *key) {
 		return -1;
 	}
 	int f = freqRBT(t, key);
+	RBNODE *unwrap = unwrapGST(temp);
 	if (f > 1) {
-		RBNODE *target = newRBNODE(key);
+		deleteGST(t->tree, unwrap);
+		return f - 1;
+		/*RBNODE *target = newRBNODE(key);
 		int ans = deleteGST(t->tree, target);
 		free(target);
-		return ans;
+		return ans;*/
 	}
 	else {
-		swapToLeafGST(t->tree, temp);
-		deleteFixup(t, temp);
-		pruneLeafGST(t->tree, temp);
+		int size = sizeRBT(t);
+		TNODE *node = swapToLeafGST(t->tree, temp);
+		deleteFixup(t, node);
+		pruneLeafGST(t->tree, node);
+		setRBTsize(t, size - 1);
 		return 0;
 	}
 	return -1;
